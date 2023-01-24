@@ -1,0 +1,8 @@
+buildjob:
+  stage: build
+  tags:
+    - dockergitlab
+  script:
+    - docker build -t eunbiyoon0717/flaskapp:latest
+    - docker image push eunbiyoon0717/flaskapp:latest
+    - aws ecs update-service -cluster flaskappcluster -service flaskapp-service --force-new-deployment
